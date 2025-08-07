@@ -283,7 +283,13 @@ function resetButtonState() {
 
 async function initializeDevice(device) {
     try {
-        console.log('Initializing WebUSB device...');
+        console.log('Initializing WebUSB device:', {
+            vendorId: device.vendorId,
+            productId: device.productId,
+            productName: device.productName,
+            manufacturerName: device.manufacturerName,
+            serialNumber: device.serialNumber
+        });
         
         // Show connection status
         displayConnectionStatus('Opening device connection...');
@@ -297,8 +303,11 @@ async function initializeDevice(device) {
         
         // Select device configuration (usually configuration 1)
         if (device.configuration === null) {
+            console.log('Selecting device configuration...');
             await device.selectConfiguration(1);
             console.log('Device configuration selected');
+        } else {
+            console.log('Device already has configuration:', device.configuration.configurationValue);
         }
         
         // Get the first interface (usually interface 0)
@@ -307,15 +316,41 @@ async function initializeDevice(device) {
             throw new Error('No interfaces found on device');
         }
         
+        console.log('Available interfaces:', configuration.interfaces.map(iface => ({
+            interfaceNumber: iface.interfaceNumber,
+            alternates: iface.alternates.length
+        })));
+        
         const interfaceNumber = configuration.interfaces[0].interfaceNumber;
-        console.log(`Claiming interface ${interfaceNumber}`);
+        console.log(`Attempting to claim interface ${interfaceNumber}`);
         
         // Update connection status
         displayConnectionStatus(`Claiming interface ${interfaceNumber}...`);
         
-        // Claim the interface for exclusive access
-        await device.claimInterface(interfaceNumber);
-        console.log(`Interface ${interfaceNumber} claimed successfully`);
+        try {
+            // Check if interface is already claimed
+            const interface_ = configuration.interfaces[0];
+            console.log('Interface details:', {
+                interfaceNumber: interface_.interfaceNumber,
+                claimed: interface_.claimed,
+                alternates: interface_.alternates.length
+            });
+            
+            // Claim the interface for exclusive access
+            await device.claimInterface(interfaceNumber);
+            console.log(`Interface ${interfaceNumber} claimed successfully`);
+            
+        } catch (claimError) {
+            console.warn('Failed to claim interface:', claimError);
+            
+            // For some devices, we can continue without claiming interface
+            // This is common for devices that don't require exclusive access
+            if (claimError.name === 'InvalidStateError' || claimError.name === 'NotFoundError') {
+                console.log('Continuing without interface claim (some devices work without it)');
+            } else {
+                throw claimError;
+            }
+        }
         
         // Store device reference for later use
         window.currentDevice = device;
@@ -350,22 +385,28 @@ async function initializeDevice(device) {
         }, 2000); // Wait 2 seconds before auto-starting
         
     } catch (error) {
-        console.error('Error initializing device:', error);
+        console.error('Error initializing device:', {
+            name: error.name,
+            message: error.message,
+            stack: error.stack
+        });
         
         // Reset button state on error
         resetButtonState();
         
         // Display specific error messages based on error type
         if (error.name === 'SecurityError') {
-            displayErrorMessage('Security Error', 'Unable to access device. Please ensure proper permissions and HTTPS connection.');
+            displayErrorMessage('Security Error', `Device access denied: ${error.message}. The device may already be in use by another application or require special permissions.`);
         } else if (error.name === 'NetworkError') {
             displayErrorMessage('Network Error', 'Device disconnected or communication error occurred.');
         } else if (error.name === 'InvalidStateError') {
-            displayErrorMessage('Device State Error', 'Device is in an invalid state. Please reconnect the device.');
+            displayErrorMessage('Device State Error', `Device is in an invalid state: ${error.message}. Try disconnecting and reconnecting the device.`);
+        } else if (error.name === 'NotFoundError') {
+            displayErrorMessage('Device Not Found', 'Device was disconnected during initialization.');
         } else if (error.message.includes('interfaces')) {
             displayErrorMessage('Interface Error', 'No valid interfaces found on device. Device may not be supported.');
         } else {
-            displayErrorMessage('Initialization Error', `Failed to initialize device: ${error.message}`);
+            displayErrorMessage('Initialization Error', `Failed to initialize device: ${error.name} - ${error.message}`);
         }
     }
 }
