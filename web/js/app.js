@@ -111,16 +111,10 @@ async function handleAcquireClick() {
         acquireButton.textContent = 'Selecting Device...';
         acquireButton.disabled = true;
         
-        // Request WebUSB device with filters for common intra-oral scanner vendors
+        // Request WebUSB device - show all available devices for selection
+        // The empty filters array will show all USB devices that support WebUSB
         const device = await navigator.usb.requestDevice({
-            filters: [
-                // Add common intra-oral scanner vendor IDs
-                // These are examples - replace with actual vendor IDs when known
-                { vendorId: 0x0483 }, // STMicroelectronics (common for medical devices)
-                { vendorId: 0x04B4 }, // Cypress Semiconductor
-                { vendorId: 0x1A86 }, // QinHeng Electronics
-                // Add more vendor IDs as needed for specific devices
-            ]
+            filters: [] // Empty filters array shows all available WebUSB devices
         });
         
         console.log('WebUSB device selected:', device);
