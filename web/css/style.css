@@ -1,0 +1,92 @@
+/* Discord-dark theme styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #2F3136;
+    color: #FFFFFF;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #202225;
+    padding: 1.5rem 0;
+    text-align: center;
+    border-bottom: 2px solid #40444B;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.acquire-button {
+    background-color: #5865F2;
+    color: #FFFFFF;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 200px;
+}
+
+.acquire-button:hover {
+    background-color: #4752C4;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(88, 101, 242, 0.4);
+}
+
+.acquire-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(88, 101, 242, 0.3);
+}
+
+.acquire-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.3);
+}
+
+/* Additional Discord-themed elements */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #2F3136;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #40444B;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5865F2;
+}
