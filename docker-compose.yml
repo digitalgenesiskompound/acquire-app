@@ -4,10 +4,15 @@ services:
   app:
     build: .
     ports:
-      - "8080:8080"
+      - "8080:8080"   # HTTP port
+      - "8443:8443"   # HTTPS port
     restart: unless-stopped
     environment:
-      - PORT=8080
+      - PORT=8443      # Primary port for HTTPS
+      - HTTP_PORT=8080 # Fallback HTTP port
+      - HOST=0.0.0.0
+    volumes:
+      - ./certs:/certs:ro  # Mount certificates as read-only
     
   # Optional: Add a database service if needed
   # postgres:

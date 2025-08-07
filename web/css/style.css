@@ -73,6 +73,306 @@ main {
     box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.3);
 }
 
+/* WebUSB Compatibility Message */
+.compatibility-message {
+    background-color: #FAA61A;
+    color: #2F3136;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(250, 166, 26, 0.3);
+}
+
+.compatibility-message .compatibility-icon {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.compatibility-message h3 {
+    color: #2F3136;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.compatibility-message p {
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.compatibility-message ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.compatibility-message li {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.compatibility-message .note {
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    opacity: 0.8;
+}
+
+/* Device Status Messages */
+.device-message {
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    text-align: center;
+    animation: slideIn 0.3s ease-out;
+}
+
+.device-message.success {
+    background-color: #57F287;
+    color: #2F3136;
+    box-shadow: 0 4px 12px rgba(87, 242, 135, 0.3);
+}
+
+.device-message.error {
+    background-color: #ED4245;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(237, 66, 69, 0.3);
+}
+
+.device-message.connecting {
+    background-color: #5865F2;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
+}
+
+.device-message .device-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.device-message h3 {
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.device-message p {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.device-message.success p {
+    color: #2F3136;
+}
+
+.connection-details {
+    font-size: 0.9rem;
+    font-style: italic;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+}
+
+/* Connection Spinner */
+.connection-spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #FFFFFF;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Protocol Status Indicator */
+.protocol-status {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    animation: slideIn 0.3s ease-out;
+}
+
+.protocol-status.https {
+    background-color: #57F287;
+    color: #2F3136;
+    box-shadow: 0 2px 8px rgba(87, 242, 135, 0.2);
+}
+
+.protocol-status.http {
+    background-color: #FAA61A;
+    color: #2F3136;
+    box-shadow: 0 2px 8px rgba(250, 166, 26, 0.2);
+}
+
+.protocol-status.insecure {
+    background-color: #ED4245;
+    color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(237, 66, 69, 0.2);
+}
+
+.protocol-status .protocol-icon {
+    font-size: 1rem;
+}
+
+.protocol-status.hidden {
+    display: none;
+}
+
+/* Status Message */
+.status-message {
+    min-height: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+/* Button States */
+.acquire-button:disabled {
+    background-color: #4F545C;
+    color: #72767D;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.acquire-button.connected {
+    background-color: #57F287;
+    color: #2F3136;
+}
+
+.acquire-button.connected:hover {
+    background-color: #3BA55D;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(87, 242, 135, 0.4);
+}
+
+/* API Status Messages */
+.device-message.api-status {
+    background-color: #5865F2;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
+    border-left: 4px solid #4752C4;
+}
+
+.device-message.api-error {
+    background-color: #ED4245;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(237, 66, 69, 0.4);
+    border-left: 4px solid #A12828;
+}
+
+.device-message.api-success {
+    background-color: #57F287;
+    color: #2F3136;
+    box-shadow: 0 4px 12px rgba(87, 242, 135, 0.4);
+    border-left: 4px solid #3BA55D;
+}
+
+/* Progress Indicators */
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background-color: #40444B;
+    border-radius: 3px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #5865F2, #7289DA);
+    transition: width 0.3s ease;
+    border-radius: 3px;
+}
+
+/* WebSocket Connection Status */
+.websocket-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #B9BBBE;
+    margin-top: 0.5rem;
+}
+
+.websocket-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ED4245;
+    animation: pulse 2s infinite;
+}
+
+.websocket-indicator.connected {
+    background-color: #57F287;
+    animation: none;
+}
+
+.websocket-indicator.connecting {
+    background-color: #FAA61A;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.acquire-button:disabled:hover {
+    background-color: #4F545C;
+    transform: none;
+    box-shadow: none;
+}
+
+.acquire-button.connected {
+    background-color: #57F287;
+    color: #2F3136;
+    font-weight: 700;
+}
+
+.acquire-button.connected:hover {
+    background-color: #3BA55C;
+    color: #2F3136;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(87, 242, 135, 0.4);
+}
+
+.acquire-button.connected:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(87, 242, 135, 0.3);
+}
+
+/* Animation for messages */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Additional Discord-themed elements */
 ::-webkit-scrollbar {
     width: 8px;

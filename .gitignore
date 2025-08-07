@@ -17,6 +17,32 @@
 # Go workspace file
 go.work
 
+# Documentation files (except README.md)
+*.md
+!README.md
+
+# SSL certificates
+certs/*.pem
+certs/*.key
+certs/*.crt
+
+# Test files
+test_*.html
+web/test.html
+
+# Scripts
+run_*.sh
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
 # Compiled binary
 /bin/
 main

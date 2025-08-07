@@ -9,6 +9,7 @@ import (
 type Config struct {
 	Host        string
 	Port        string
+	HTTPPort    string
 	Environment string
 	Debug       bool
 }
@@ -18,6 +19,7 @@ func Load() *Config {
 	cfg := &Config{
 		Host:        getEnv("HOST", "0.0.0.0"),
 		Port:        getEnv("PORT", "8080"),
+		HTTPPort:    getEnv("HTTP_PORT", "8080"),
 		Environment: getEnv("ENV", "development"),
 		Debug:       getEnvBool("DEBUG", true),
 	}
